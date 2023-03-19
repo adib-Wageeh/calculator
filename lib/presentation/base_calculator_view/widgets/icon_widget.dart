@@ -49,6 +49,9 @@ class IconWidget extends StatelessWidget {
       case "AC":
         Provider.of<CalculatorServices>(context,listen: false).setToZero();
         break;
+      case "<=":
+        Provider.of<CalculatorServices>(context,listen: false).removeLastItem();
+        break;
       default:
         Provider.of<CalculatorServices>(context,listen: false).addNum(word);
         break;

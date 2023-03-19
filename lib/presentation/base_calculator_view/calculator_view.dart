@@ -20,9 +20,9 @@ class CalculatorView extends StatelessWidget {
 
     final List<List<IconProperties>> list =[
       [IconProperties(iconTextColor: Colors.white70,iconWidth:screenWidth*0.22,iconText: "AC"),
-        IconProperties(iconTextColor: Colors.white70,iconWidth:screenWidth*0.22,iconText: "-" ),
+        IconProperties(iconTextColor: Colors.white70,iconWidth:screenWidth*0.22,iconText: "/" ),
         IconProperties(iconTextColor: Colors.white70,iconWidth:screenWidth*0.22,iconText: "%" ),
-        IconProperties(iconTextColor: Colors.orange,iconWidth:screenWidth*0.22,iconText: "/" )],
+        IconProperties(iconTextColor: Colors.orange,iconWidth:screenWidth*0.22,iconText: "<=" )],
 
       [IconProperties(iconTextColor: Colors.white,iconWidth:screenWidth*0.22,iconText: "7"),
         IconProperties(iconTextColor: Colors.white,iconWidth:screenWidth*0.22,iconText: "8" ),

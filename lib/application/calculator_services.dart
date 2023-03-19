@@ -22,7 +22,7 @@ class CalculatorServices extends ChangeNotifier{
     try {
       Expression exp = p.parse(newExpression);
       String res = exp.evaluate(EvaluationType.REAL, context);
-      if (res == "Infinity" || res == "NaN") {
+      if (res == "Infinity" || res == "NaN" || res.toString() == "-Infinity") {
         _error = true;
         notifyListeners();
       } else {
@@ -35,7 +35,7 @@ class CalculatorServices extends ChangeNotifier{
 
   }
 
-//when pressing any button
+//when pressing any number or operation
   void addNum(String num){
 
     if( checkPosition(num) ==true) {
@@ -47,17 +47,13 @@ class CalculatorServices extends ChangeNotifier{
   }
 
   void changeReadyNumber(String newExpression){
-
     try {
       Expression exp = p.parse(newExpression);
       double res = exp.evaluate(EvaluationType.REAL, context);
-      if (res.toString() == "Infinity" || res.toString() == "NaN") {
-        print("errorrrrrrrrrrrrr");
+      if (res.toString() == "Infinity" || res.toString() == "NaN"|| res.toString() == "-Infinity") {
         _error = true;
       } else {
-        //if(int.parse(res.toString()).toString() != _finalNumber) {
           _readyNumber = res.toString();
-        //}
       }
     }catch(e){
       debugPrint(e.toString());
@@ -84,6 +80,22 @@ class CalculatorServices extends ChangeNotifier{
     }
 
       return true;
+  }
+
+
+  void removeLastItem(){
+
+    if(_finalNumber != "") {
+      _finalNumber = _finalNumber.substring(0, _finalNumber.length-1);
+      if(_finalNumber == "")
+        {
+          _readyNumber = "";
+        }
+      else {
+        changeReadyNumber(_finalNumber);
+      }
+      notifyListeners();
+    }
   }
 
 }
