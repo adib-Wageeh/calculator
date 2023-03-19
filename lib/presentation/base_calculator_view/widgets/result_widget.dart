@@ -15,7 +15,11 @@ class ResultWidget extends StatelessWidget {
       alignment: Alignment.centerRight,
       height: widgetHeight*0.33,
       width: double.infinity,
-      child: (Text(Provider.of<CalculatorServices>(context).getNumber.toString(),style: const TextStyle(fontSize: 48,fontWeight: FontWeight.w400))),
+      child: FittedBox(
+        child: (
+        SelectableText(Provider.of<CalculatorServices>(context).getNumber.toString(),
+            style: const TextStyle(fontSize: 64,fontWeight: FontWeight.w400))),
+      ),
     );
   }
 }

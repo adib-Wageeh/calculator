@@ -3,28 +3,87 @@ import 'package:flutter/material.dart'
 
 class CalculatorServices extends ChangeNotifier{
 
-  double _number=0;
+  // final result
+  String _finalNumber="";
+  bool _error = false;
+
+  //result before pressing equal sign
+  String _readyNumber="";
+
   ContextModel context = ContextModel();
   Parser p = Parser();
 
-  double get getNumber=>_number;
+  String get getNumber=>_finalNumber;
+  String get getReadyNumber=>_readyNumber;
+  bool get getErrorState=>_error;
 
-  void changeNumber(String newExpression){
-
-    Expression exp = p.parse(newExpression);
-    String res = exp.evaluate(EvaluationType.REAL, context);
-    if(res != "INFINITY"){
-      _number = double.parse(res);
-      notifyListeners();
-    }else{
-
+  // when pressing Equal sign
+  void changeFinalNumber(String newExpression){
+    try {
+      Expression exp = p.parse(newExpression);
+      String res = exp.evaluate(EvaluationType.REAL, context);
+      if (res == "Infinity" || res == "NaN") {
+        _error = true;
+        notifyListeners();
+      } else {
+        _finalNumber = res;
+        _readyNumber = "";
+      }
+    }catch(e){
+      debugPrint(e.toString());
     }
 
   }
 
+//when pressing any button
+  void addNum(String num){
+
+    if( checkPosition(num) ==true) {
+      _finalNumber = _finalNumber + num;
+      changeReadyNumber(_finalNumber);
+      notifyListeners();
+    }
+
+  }
+
+  void changeReadyNumber(String newExpression){
+
+    try {
+      Expression exp = p.parse(newExpression);
+      double res = exp.evaluate(EvaluationType.REAL, context);
+      if (res.toString() == "Infinity" || res.toString() == "NaN") {
+        print("errorrrrrrrrrrrrr");
+        _error = true;
+      } else {
+        //if(int.parse(res.toString()).toString() != _finalNumber) {
+          _readyNumber = res.toString();
+        //}
+      }
+    }catch(e){
+      debugPrint(e.toString());
+    }
+  }
+
+  // when pressing AC
   void setToZero(){
-    _number = 0.0;
+    _finalNumber = "";
+    _readyNumber = "";
+    _error=false;
     notifyListeners();
+  }
+
+
+  // checks if multible operations after each other
+  bool checkPosition(String num){
+
+    if( (num =="*")||(num =="/")||(num =="+")||(num =="-")||(num =="%") ){
+
+      if( _finalNumber == "" || _finalNumber.endsWith("*") || _finalNumber.endsWith("/") || _finalNumber.endsWith("+") || _finalNumber.endsWith("%") || _finalNumber.endsWith("-")) {
+        return false;
+      }
+    }
+
+      return true;
   }
 
 }
