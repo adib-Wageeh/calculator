@@ -1,3 +1,4 @@
+import 'package:calculator/presentation/base_calculator_view/widgets/result_widget.dart';
 import 'package:calculator/presentation/base_calculator_view/widgets/row_of_icons_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +52,14 @@ class CalculatorView extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: screenHeight*0.34,
+                child:
+                LayoutBuilder(
+                    builder: (context,constraints){
+                      return Align(
+                          alignment: Alignment.centerRight,
+                          child: ResultWidget(widgetHeight: constraints.maxHeight,widgetWidth: constraints.maxWidth,));
+                    },
+                    ),
               ),
               ..._list.map((rowOfIcons) {
                 return Column(

@@ -7,7 +7,7 @@ class CalculatorServices extends ChangeNotifier{
   ContextModel context = ContextModel();
   Parser p = Parser();
 
-  get getNumber=>_number;
+  double get getNumber=>_number;
 
   void changeNumber(String newExpression){
 
@@ -20,6 +20,11 @@ class CalculatorServices extends ChangeNotifier{
 
     }
 
+  }
+
+  void setToZero(){
+    _number = 0.0;
+    notifyListeners();
   }
 
 }
