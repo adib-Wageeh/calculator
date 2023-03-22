@@ -2,9 +2,8 @@ import 'package:calculator/presentation/base_calculator_view/widgets/ready_text_
 import 'package:calculator/presentation/base_calculator_view/widgets/result_widget.dart';
 import 'package:calculator/presentation/base_calculator_view/widgets/row_of_icons_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:math_expressions/math_expressions.dart';
 import 'package:provider/provider.dart';
-import '../../application/calculator_services.dart';
+import 'services/calculator_services.dart';
 import '../../domain/IconClass.dart';
 
 class CalculatorView extends StatelessWidget {
@@ -57,15 +56,13 @@ class CalculatorView extends StatelessWidget {
                 child:
                 LayoutBuilder(
                     builder: (context,constraints){
-                      return Align(
-                          alignment: Alignment.bottomRight,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ResultWidget(widgetHeight: constraints.maxHeight,widgetWidth: constraints.maxWidth,),
-                              ReadyTextWidget(widgetHeight: constraints.maxHeight,widgetWidth: constraints.maxWidth,)
-                            ],
-                          ));
+                      return Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          ResultWidget(widgetHeight: constraints.maxHeight,widgetWidth: constraints.maxWidth,),
+                          ReadyTextWidget(widgetHeight: constraints.maxHeight,widgetWidth: constraints.maxWidth,)
+                        ],
+                      );
                     },
                     ),
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../application/calculator_services.dart';
+import '../services/calculator_services.dart';
 import '../../../domain/IconClass.dart';
 
 class IconWidget extends StatelessWidget {
@@ -11,7 +11,6 @@ class IconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Size screenSize = MediaQuery.of(context).size;
     return Container(
       width:iconData.iconWidth,
@@ -23,7 +22,7 @@ class IconWidget extends StatelessWidget {
           color: Colors.grey.withOpacity(0.5),
           spreadRadius: 3,
           blurRadius: 7,
-          offset: Offset(0, 3), // changes position of shadow
+          offset: const Offset(0, 3), // changes position of shadow
         ),]
       ),
       child: Material(
@@ -51,6 +50,9 @@ class IconWidget extends StatelessWidget {
         break;
       case "<=":
         Provider.of<CalculatorServices>(context,listen: false).removeLastItem();
+        break;
+      case "=":
+        Provider.of<CalculatorServices>(context,listen: false).pressedEqualSign();
         break;
       default:
         Provider.of<CalculatorServices>(context,listen: false).addNum(word);

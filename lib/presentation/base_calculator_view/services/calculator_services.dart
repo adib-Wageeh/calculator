@@ -13,11 +13,19 @@ class CalculatorServices extends ChangeNotifier{
   ContextModel context = ContextModel();
   Parser p = Parser();
 
+  // if the equal is pressed it turns to true
+  bool _equalIsPressed = false;
+  void toggleEqualButton(){
+    _equalIsPressed = !_equalIsPressed;
+    notifyListeners();
+  }
+
   String get getNumber=>_finalNumber;
   String get getReadyNumber=>_readyNumber;
   bool get getErrorState=>_error;
+  bool get equalState=>_equalIsPressed;
 
-  // when pressing Equal sign
+  // when changing the final result
   void changeFinalNumber(String newExpression){
     try {
       Expression exp = p.parse(newExpression);
@@ -26,11 +34,28 @@ class CalculatorServices extends ChangeNotifier{
         _error = true;
         notifyListeners();
       } else {
-        _finalNumber = res;
-        _readyNumber = "";
+          _finalNumber = res;
+          _readyNumber = "";
+          _error = false;
+
       }
     }catch(e){
-      debugPrint(e.toString());
+      debugPrint("error  "+e.toString());
+    }
+
+  }
+
+  // when pressing equal sign
+  void pressedEqualSign()async{
+    toggleEqualButton();
+    if(_error ==false){
+      await Future.delayed(const Duration(milliseconds: 100), (){});
+      if(_readyNumber != "")
+      _finalNumber = _readyNumber;
+      _readyNumber = "";
+
+      toggleEqualButton();
+      notifyListeners();
     }
 
   }
@@ -54,6 +79,7 @@ class CalculatorServices extends ChangeNotifier{
         _error = true;
       } else {
           _readyNumber = res.toString();
+          _error = false;
       }
     }catch(e){
       debugPrint(e.toString());
@@ -68,9 +94,9 @@ class CalculatorServices extends ChangeNotifier{
     notifyListeners();
   }
 
-
   // checks if multible operations after each other
   bool checkPosition(String num){
+
 
     if( (num =="*")||(num =="/")||(num =="+")||(num =="-")||(num =="%") ){
 

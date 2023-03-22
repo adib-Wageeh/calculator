@@ -2,7 +2,7 @@ import 'package:calculator/presentation/base_calculator_view/calculator_view.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'application/calculator_services.dart';
+import 'presentation/base_calculator_view/services/calculator_services.dart';
 
   void main(){
     // ContextModel context = ContextModel();
