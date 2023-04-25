@@ -2,15 +2,7 @@
 
 A new Flutter project.
 
-## Getting Started
+Calculator is a flutter calculator that uses flutter provider stateManagement and math_expressions library for handling arithmetic expressions
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_20230426_012523](https://user-images.githubusercontent.com/87152219/234429525-b8faa601-5714-4b00-a559-07428df0a63b.jpg)
+![Screenshot_20230426_012535](https://user-images.githubusercontent.com/87152219/234429531-3a563003-f523-463c-97fc-3c40de5fa72f.jpg)
